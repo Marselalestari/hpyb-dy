@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login | Seladamar</title>
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #a5b4fc, #c084fc, #f0abfc);
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      /* Floating pastel shapes */
+      .circle {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.25;
+        filter: blur(80px);
+        animation: float 10s ease-in-out infinite;
+      }
+      .circle.one {
+        width: 250px;
+        height: 250px;
+        background: #818cf8;
+        top: 10%;
+        left: 10%;
+      }
+      .circle.two {
+        width: 350px;
+        height: 350px;
+        background: #a855f7;
+        bottom: 15%;
+        right: 10%;
+        animation-delay: 3s;
+      }
+
+      @keyframes float {
+        0%, 100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-25px);
+        }
+      }
+
+      /* Card container */
+      .card {
+        width: 100%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 20px;
+        box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        padding: 40px 35px;
+        z-index: 1;
+        text-align: center;
+        animation: fadeIn 1s ease forwards;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      h3 {
+        color: #ffffff;
+        font-size: 26px;
+        font-weight: 600;
+        margin-bottom: 25px;
+        letter-spacing: 0.5px;
+      }
+
+      label {
+        display: block;
+        text-align: left;
+        font-size: 14px;
+        font-weight: 500;
+        color: #f8fafc;
+        margin-bottom: 6px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 18px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        color: #1e3a8a;
+        background: rgba(255, 255, 255, 0.8);
+      }
+
+      input:focus {
+        border: 2px solid #7c3aed;
+        background: #fff;
+      }
+
+      input::placeholder {
+        color: #9ca3af;
+      }
+
+      .enter-btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(90deg, #2563eb, #7c3aed);
+        color: white;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: transform 0.25s, box-shadow 0.25s;
+      }
+
+      .enter-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 20px rgba(124, 58, 237, 0.4);
+      }
+
+      .error {
+        background: rgba(239, 68, 68, 0.85);
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 15px;
+        display: none;
+        animation: shake 0.3s ease;
+      }
+
+      @keyframes shake {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        50% { transform: translateX(5px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+      }
+
+      .footer {
+        margin-top: 18px;
+        font-size: 13px;
+        color: #e5e7eb;
+      }
+
+      .footer a {
+        color: #fff;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      .footer a:hover {
+        color: #f9fafb;
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+
+    <div class="card">
+      <h3>Login Dulu Ya 💫</h3>
+      <div id="errorBox" class="error"></div>
+
+      <form id="loginForm">
+        <label for="email">Email</label>
+        <input
+          type="text"
+          id="email"
+          placeholder="Masukkan email kamu"
+          required
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="Masukkan password"
+          required
+        />
+
+        <button class="enter-btn" type="submit">Login</button>
+      </form>
+
+      <div class="footer">
+        © 2025 <a href="#">Seladamar</a> • All rights reserved.
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("loginForm");
+      const errorBox = document.getElementById("errorBox");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        const validEmail = "damars@gmail.com";
+        const validPassword = "ilovesela";
+
+        if (email === validEmail && password === validPassword) {
+          window.location.href = "2.html";
+        } else {
+          errorBox.style.display = "block";
+          errorBox.textContent = "Email atau password salah!";
+        }
+      });
+    </script>
+  </body>
+</html>
